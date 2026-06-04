@@ -219,12 +219,9 @@ void jiaohu() {
     
     printf("\nFTP \n");
     printf("  user ->\n");
-    printf("  pasv  \n");
     printf("  ls  \n");
     printf("  get\n");
     printf("  put \n");
-    printf("  cd  \n");
-    printf("  pwd \n");
     printf("  quit \n\n");
     
     while (1) {
@@ -234,9 +231,9 @@ void jiaohu() {
         int len = strlen(buf);
         if (len > 0 && buf[len-1] == '\n') buf[len-1] = '\0';
         
-        if (strcmp(buf, "pasv") == 0) {
-            kaiqi_pasv();                  }
-        else if (strncmp(buf, "ls", 2) == 0) {
+
+        if (strncmp(buf, "ls", 2) == 0) {
+            kaiqi_pasv();
             liechu_mulu();
         }
         else if (strncmp(buf, "user ", 5) == 0) {
@@ -245,16 +242,12 @@ void jiaohu() {
             denglu(yonghu, mima);
         }
         else if (strncmp(buf, "get ", 4) == 0) {
+            kaiqi_pasv();
             xiazai(buf + 4);
         }
         else if (strncmp(buf, "put ", 4) == 0) {
+            kaiqi_pasv();
             shangchuan(buf + 4);
-        }
-        else if (strncmp(buf, "cd ", 3) == 0) {
-            ml_yd(buf);
-        }
-        else if (strcmp(buf, "pwd") == 0) {
-            ml_yd("PWD");
         }
         else if (strcmp(buf, "quit") == 0) {
             ml_yd("QUIT");
@@ -266,7 +259,6 @@ void jiaohu() {
     }
     
 }
-
 
 int main(int argc,char*argv[]){
     char* ip="127.0.0.1";
@@ -301,7 +293,7 @@ int main(int argc,char*argv[]){
     jieshou_yd();
     
 
-    
+    kaiqi_pasv();
 
     jiaohu();
     

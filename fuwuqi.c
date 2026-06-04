@@ -179,39 +179,13 @@ void chuli_USER(int sock,char* arg,char* yonghu){
 }
 
 void chuli_PASS(int sock, int* renzheng, char* yonghu, char* arg) {
-    if (strcmp(yonghu, "admin") == 0 && strcmp(arg, "lhy'sftp") == 0) {
+    if (strcmp(yonghu, "shandian") == 0 && strcmp(arg, "lhy'sftp") == 0) {
         *renzheng = 1;
         mingling_fasong(sock, "230 ok\r\n");
     } 
     else {
         mingling_fasong(sock, "530 no\r\n");
     }
-}
-
-void chuli_PWD(int sock, char* mulu) {
-    mingling_fasong(sock, "257 \"%s\" now mulu\r\n", mulu);
-}
-
-void chuli_CWD(int sock, char* mulu, char* arg) {
-    if (strcmp(arg, "/") == 0) strcpy(mulu, "/");
-    else if (strcmp(arg, "..") == 0) {
-        if (strcmp(mulu, "/") != 0) {
-            char* pos = strrchr(mulu, '/');
-            if (pos == mulu) strcpy(mulu, "/");
-            else *pos = '\0';
-        }
-    } 
-    else {
-        if (strcmp(mulu, "/") == 0) snprintf(mulu, 256, "/%s", arg);
-        else { strcat(mulu, "/"); strcat(mulu, arg); }
-    }
-    mingling_fasong(sock, "250 mulu change\r\n");
-}
-
-void chuli_TYPE(int sock, char* arg) {
-    if (arg[0] == 'A') mingling_fasong(sock, "200 turnA\r\n");
-    else if (arg[0] == 'I') mingling_fasong(sock, "200 turnI\r\n");
-    else mingling_fasong(sock, "504 no zhichi\r\n");
 }
 
 void chuli_QUIT(int sock) {
@@ -320,8 +294,6 @@ void mingling_zhixing(int sock, char* cmd,
     
     if (strcmp(ml, "USER") == 0) chuli_USER(sock, cs, yonghu);
     else if (strcmp(ml, "PASS") == 0) chuli_PASS(sock, renzheng, yonghu, cs);
-    else if (strcmp(ml, "PWD") == 0) chuli_PWD(sock, mulu);
-    else if (strcmp(ml, "CWD") == 0) chuli_CWD(sock, mulu, cs);
     else if (strcmp(ml, "PASV") == 0) {
         // 先关闭旧的数据 socket
         if (*shuju_sock >= 0) close(*shuju_sock);
@@ -330,7 +302,6 @@ void mingling_zhixing(int sock, char* cmd,
     else if (strcmp(ml, "LIST") == 0) chuli_LIST(sock, *shuju_sock, mulu);
     else if (strcmp(ml, "RETR") == 0) chuli_RETR(sock, *shuju_sock, mulu, cs);
     else if (strcmp(ml, "STOR") == 0) chuli_STOR(sock, *shuju_sock, mulu, cs);
-    else if (strcmp(ml, "TYPE") == 0) chuli_TYPE(sock, cs);
     else if (strcmp(ml, "SYST") == 0) mingling_fasong(sock, "215 UNIX Type: L8\r\n");
     else if (strcmp(ml, "FEAT") == 0) {
         mingling_fasong(sock, "211-Features:\r\n PASV\r\n UTF8\r\n211 End\r\n");
