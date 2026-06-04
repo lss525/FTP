@@ -1,21 +1,44 @@
-# FTP   
+# FTP     
+  
+## Ubuntu 环境配置：    
+#### （建议）第一步：更新系统  
+      sudo apt update
+      sudo apt upgrade -y  
+        
+#### 第二步：安装编译工具  
+   
+      sudo apt install -y build-essential  
+      //build-essential可直接将gcc,g++,make直接安装好；
+
 ## 项目结构：  
        FTP/
-      ├── fuwuqi.c        //服务器
-      ├── client.c        //客户端
+      ├── ser.c        //服务器
+      ├── cli.c        //客户端
       ├── welcome.txt     //测试样本 
       └── README.md       //项目介绍  
           
 ## 流程步骤：   
 ### 前置条件：
-1.运行服务器代码：  
+#### 1.Clone:  
+        
+       git@github.com:lss525/FTP.git  
+      
+#### 2.运行服务器代码：  
+       cd FTP/ser
+       ./fuwuqi 2100
+
+
   - 当出现以下情况，说明服务器开启成功：    
 
         duankou:2100
         /tmp/ftp_root
   - 当出现运行结束，说明服务器已经开启；  
 
-2.运行客户端代码：  
+#### 3.运行客户端代码：    
+  
+        cd FTP/cli
+        /cli 127.0.0.1.2100
+ 
   - 当出现以下界面时证明连接服务器成功：  
       
         already link 127.0.0.1:2100
