@@ -25,8 +25,6 @@
         ls  
         get
         put 
-        cd  
-        pwd 
         quit 
 
         ftp>   
