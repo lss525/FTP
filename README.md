@@ -1,11 +1,11 @@
 # FTP     
   
 ## Ubuntu 环境配置：    
-#### （建议）第一步：更新系统  
+### （建议）第一步：更新系统  
       sudo apt update
       sudo apt upgrade -y  
         
-#### 第二步：安装编译工具  
+### 第二步：安装编译工具  
    
       sudo apt install -y build-essential  
       //build-essential可直接将gcc,g++,make直接安装好；
@@ -19,7 +19,7 @@
           
 ## 流程步骤：   
 ### 前置条件：
-#### 1.Clone:  
+### 1.Clone:  
         
        git@github.com:lss525/FTP.git  
       
@@ -56,7 +56,18 @@
 
           connect failed: Connection refused  
     
-### 功能简述：  
+### 功能简述：    
+#### 简图：
+| 命令 | 功能 |
+|------|------|
+| USER | 用户名 |  
+| PASS | 密码验证 | 
+| PASV | 被动模式 |  
+| LIST | 列出目录 | 
+| RETR | 下载文件 |  
+| STOR | 上传文件 |  
+| QUIT | 断开连接 |  
+
 #### 1.登录：
 - 进入终端界面后，输入“user ”后加用户名和密码；
   - 用户名为：shandian
