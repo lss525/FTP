@@ -204,7 +204,6 @@ int chuli_PASV(int sock, char* fuwu_ip) {
     addr.sin_addr.s_addr = INADDR_ANY;
     addr.sin_port = 0;  // 系统分配端口
     bind(shuju_sock, (struct sockaddr*)&addr, sizeof(addr));
-    
     socklen_t al = sizeof(addr);
     getsockname(shuju_sock, (struct sockaddr*)&addr, &al);
     int dk = ntohs(addr.sin_port);  // 获取分配的端口
