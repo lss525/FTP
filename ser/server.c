@@ -207,12 +207,9 @@ int chuli_PASV(int sock, char* fuwu_ip) {
     socklen_t al = sizeof(addr);
     getsockname(shuju_sock, (struct sockaddr*)&addr, &al);
     int dk = ntohs(addr.sin_port);  // 获取分配的端口
-    
     listen(shuju_sock, 1);
-    
     int p1 = dk / 256;
     int p2 = dk % 256;
-    
     char ip_fmt[32];
     strcpy(ip_fmt, fuwu_ip);
     for (int i = 0; ip_fmt[i]; i++)
